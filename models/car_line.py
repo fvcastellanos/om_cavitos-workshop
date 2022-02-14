@@ -12,5 +12,5 @@ class CarLine(models.Model):
     )
 
     name = fields.Char("Nombre", translate = True, index = True, required = True)
-    description = fields.Text("Descripcion", translate = True)
+    description = fields.Text("Descripción", translate = True)
     active = fields.Boolean('Activo', default = True, readonly = True)

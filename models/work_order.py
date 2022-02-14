@@ -12,10 +12,10 @@ class WorkOrder(models.Model):
 
     car_line_id = fields.Many2one(
         'workshop.car.line',
-        'Linea'
+        'Línea'
     )
 
-    order_number = fields.Char("Numero de orden", index = True, translate = True, required = True)
+    order_number = fields.Char("Número de orden", index = True, translate = True, required = True)
     date_received = fields.Date('Fecha de ingreso', default = lambda self: fields.Date.today(), required = True)
 
     order_status = fields.Selection([
@@ -34,7 +34,7 @@ class WorkOrder(models.Model):
     car_year = fields.Integer("Modelo")
     car_odometer_value = fields.Integer('Valor odometro', required = True)
     car_odometer_measurement = fields.Selection([
-        ('kms', 'Kilometros'),
+        ('kms', 'Kilómetros'),
         ('mls', 'Millas')
     ], 'Tipo medida odometro')
 

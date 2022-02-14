@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="work_order_kanban_search_view" model="ir.ui.view">
+        <field name="name">Work Order Kanban Search</field>
+        <field name="model">workshop.work.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="order_number" />
+                <field name="date_received"/>
+                <field name="partner_id" />
+                <field name="order_status" />
+                <field name="car_line_id" />
+                <field name="car_plate" />
+            </search>
+        </field>
+    </record>
+
     <record id="work_order_kanban_view" model="ir.ui.view">
         <field name="name">Work Order Kanban</field>
         <field name="model">workshop.work.order</field>
@@ -16,7 +31,7 @@
                 <field name="car_plate" />
                 <templates>
                     <t t-name="kanban-box">
-                        <div t-aff-class="oe_kanban_global_click">
+                        <div t-attf-class="oe_kanban_global_click">
                             <div class="row">
                                 <div class="col-5">Orden No.</div>
                                 <div class="col-7">
@@ -33,16 +48,12 @@
 
                                 <div class="col-5">Fecha</div>
                                 <div class="col-7">
-                                    <strong>
-                                        <t t-esc="record.date_received.value"/>
-                                    </strong>
+                                    <t t-esc="record.date_received.value"/>
                                 </div>
 
-                                <div class="col-5">Linea</div>
+                                <div class="col-5">Línea</div>
                                 <div class="col-7">
-                                    <strong>
-                                        <t t-esc="record.car_line_id.value"/>
-                                    </strong>
+                                    <t t-esc="record.car_line_id.value"/>
                                 </div>
 
                                 <div class="col-5">Placas</div>

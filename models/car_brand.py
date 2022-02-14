@@ -11,9 +11,9 @@ class CarBrand(models.Model):
     car_lines_ids = fields.One2many(
         'workshop.car.line',
         'brand_id',
-        'Lineas asociadas a la marca'
+        'Líneas asociadas a la marca'
     )
 
     name = fields.Char("Nombre", translate = True, index = True, required = True)
-    description = fields.Text("Descripcion", translate = True)
+    description = fields.Text("Descripción", translate = True)
     active = fields.Boolean('Activo', default = True, readonly=True)
