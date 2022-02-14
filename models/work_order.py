@@ -1,5 +1,4 @@
-from operator import index
-from odoo import fields, models
+from odoo import fields, models, api
 
 class WorkOrder(models.Model):
     _name = "workshop.work.order"
@@ -18,14 +17,18 @@ class WorkOrder(models.Model):
 
     order_number = fields.Char("Numero de orden", index = True, translate = True, required = True)
     date_received = fields.Date('Fecha de ingreso', default = lambda self: fields.Date.today(), required = True)
+
     order_status = fields.Selection([
         ('process', 'En Proceso'),
         ('closed', 'Facurada'),
         ('invoice_pending', 'Pendiente facturar'),
         ('cancelled', 'Anulada'),
         ('guarantee', 'Garantia')
-    ], "Estado", index = True)
+    ], "Estado", index = True, default='process')
+
     order_notes = fields.Text('Notas', translate = True)
+
+    car_brand = fields.Char("Marca", compute = "_get_car_brand", readonly = True)
     car_plate = fields.Char("Placas", index = True, translate = True, required = True)
     car_color = fields.Char("Color", translate = True)
     car_year = fields.Integer("Modelo")
@@ -33,4 +36,14 @@ class WorkOrder(models.Model):
     car_odometer_measurement = fields.Selection([
         ('kms', 'Kilometros'),
         ('mls', 'Millas')
-    ], 'Tipo medida')
+    ], 'Tipo medida odometro')
+
+    # ------------------------------------------------------------------------------------------
+
+    @api.onchange('car_line_id')
+    def onchange_car_line_id(self):
+        self.car_brand = self.car_line_id.brand_id.name
+
+    @api.depends('car_line_id.brand_id.name')
+    def _get_car_brand(self):
+        self.car_brand = self.car_line_id.brand_id.name

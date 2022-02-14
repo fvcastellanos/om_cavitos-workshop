@@ -21,5 +21,7 @@
         'views/workshop_menu.xml',
         'views/brand_view.xml',
         'views/brand_line_view.xml',
+        'views/work_order_view.xml',
+        'views/work_order_kanban_view.xml',
     ]
 }

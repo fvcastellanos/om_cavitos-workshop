@@ -4,6 +4,10 @@
     <!-- Actions -->
 
     <act_window id="action_work_orders" name="Ordenes de trabajo" res_model="workshop.work.order" view_mode="tree,form"/>
+
+    <act_window id="action_work_orders_kanban" name="Tablero de Ordenes de trabajo" res_model="workshop.work.order" 
+        view_mode="kanban,tree,form"/>
+
     <act_window id="action_brands" name="Marcas de vehiculos" res_model="workshop.car.brand" view_mode="tree,form"/>
     <act_window id="action_brand_lines" name="Lineas por marca" res_model="workshop.car.line" view_mode="tree,form"/>
 
@@ -15,4 +19,7 @@
     <menuitem id="menu_catalogs" name="Catalogos" parent="menu_workshop" sequence="20" />
     <menuitem id="menu_brands" name="Marcas vehiculos" action="action_brands" parent="menu_catalogs" />
     <menuitem id="menu_brand_lines" name="Lineas por marca" action="action_brand_lines" parent="menu_catalogs" />
+
+    <menuitem id="menu_work_orders_kanban" name="Tablero de Ordenes de trabajo" action="action_work_orders_kanban" parent="menu_workshop" sequence="30" />
+
 </odoo>
