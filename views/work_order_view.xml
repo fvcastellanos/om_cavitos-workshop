@@ -44,6 +44,7 @@
                         <field name="date_received"/>
                         <field name="order_status" />
                         <field name="order_notes" />
+                        <field name="order_id" />
                     </group>
     
                     <group name="car_group" string="Informacion del vehiculo">

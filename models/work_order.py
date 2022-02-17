@@ -15,6 +15,11 @@ class WorkOrder(models.Model):
         'Línea'
     )
 
+    order_id = fields.Many2one(
+        'sale.order',
+        'Presupuesto'
+    )
+
     order_number = fields.Char("Número de orden", index = True, translate = True, required = True)
     date_received = fields.Date('Fecha de ingreso', default = lambda self: fields.Date.today(), required = True)
 
