@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_form_brand" model="ir.ui.view">
+        <field name="name">Brand Form</field>
+        <field name="model">workshop.car.brand</field>
+        <field name="arch" type="xml">
+
+            <form>
+                <group>
+                    <field name="name" />
+                    <field name="description" />
+                </group>
+            </form>
+
+        </field>
+
+    </record>
+</odoo>

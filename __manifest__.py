@@ -6,5 +6,22 @@
     'description': """
         Automobile Workshop Management
     """,
+    'category': 'Services',
+    'author': 'Cavitos.NET',
+    'version': '0.1',
+    'application': True,
     'installable': True,
+    'depends': [
+        'account',
+        'base',
+        'sale_management',
+        'stock'
+    ],
+    'data': [
+        'views/workshop_menu.xml',
+        'views/brand_view.xml',
+        'views/brand_line_view.xml',
+        'views/work_order_view.xml',
+        'views/work_order_kanban_view.xml',
+    ]
 }
