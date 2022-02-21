@@ -20,8 +20,19 @@ class WorkOrder(models.Model):
         'Presupuesto'
     )
 
+    order_details = fields.One2many(
+        'workshop.work.order.detail',
+        'work_order_id',
+        'Detalle de la orden'
+    )
+
     order_number = fields.Char("Número de orden", index = True, translate = True, required = True)
     date_received = fields.Date('Fecha de ingreso', default = lambda self: fields.Date.today(), required = True)
+
+    order_type = fields.Selection([
+        ('product', 'Producto'),
+        ('service', 'Reparacion')
+    ], index = True, default = 'service')
 
     order_status = fields.Selection([
         ('process', 'En Proceso'),
@@ -34,10 +45,10 @@ class WorkOrder(models.Model):
     order_notes = fields.Text('Notas', translate = True)
 
     car_brand = fields.Char("Marca", compute = "_get_car_brand", readonly = True)
-    car_plate = fields.Char("Placas", index = True, translate = True, required = True)
+    car_plate = fields.Char("Placas", index = True, translate = True)
     car_color = fields.Char("Color", translate = True)
     car_year = fields.Integer("Modelo")
-    car_odometer_value = fields.Integer('Valor odometro', required = True)
+    car_odometer_value = fields.Integer('Valor odometro')
     car_odometer_measurement = fields.Selection([
         ('kms', 'Kilómetros'),
         ('mls', 'Millas')
@@ -52,3 +63,4 @@ class WorkOrder(models.Model):
     @api.depends('car_line_id.brand_id.name')
     def _get_car_brand(self):
         self.car_brand = self.car_line_id.brand_id.name
+        
