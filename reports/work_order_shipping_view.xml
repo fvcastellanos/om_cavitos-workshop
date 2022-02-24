@@ -1,0 +1,99 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+
+    <template id="work_order_shipping">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Nota de Envío</h2>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Para</strong></td>
+                                <td>
+                                    <span t-field="o.partner_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fecha</strong></td>
+                                <td>
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')" />
+                                </td>
+                            </tr>
+                        </table>
+                        <h3>Se entrega lo siguiente</h3>
+                        <table class="table">
+                            <tr>
+                                <td><strong>Vehículo marca</strong></td>
+                                <td>
+                                    <span t-field="o.car_line_id.brand_id"/>
+                                </td>
+                                <td><strong>Línea</strong></td>
+                                <td>
+                                    <span t-field="o.car_line_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modelo</strong></td>
+                                <td>
+                                    <span t-field="o.car_year"/>
+                                </td>
+                                <td><strong>Placa</strong></td>
+                                <td>
+                                    <span t-field="o.car_plate"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Valor odómetro</strong></td>
+                                <td>
+                                    <span t-field="o.car_odometer_value"/>
+                                </td>
+                                <td><strong>KM / Millas</strong></td>
+                                <td>
+                                    <span t-field="o.car_odometer_measurement"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td width="20%">Nombre</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>DPI</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Firma</td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>    
+    
+</odoo>

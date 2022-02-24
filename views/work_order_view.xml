@@ -36,34 +36,43 @@
         <field name="model">workshop.work.order</field>
         <field name="arch" type="xml">
 
-            <form>
-                <group name="main_group">
+            <notebook>
+                <page string="Ordenes" name="order_page">
+                    <group name="main_group">
     
-                </group>
-
-                    <group name="car_group" string="Informacion del vehiculo">
-                        <field name="car_brand" />
-                        <field name="car_line_id" />
-                        <field name="car_plate" />
-                        <field name="car_color" />
-                        <field name="car_year" />
-                        <field name="car_odometer_value" />
-                        <field name="car_odometer_measurement" />
-                    </group>    
-
-                    <group name="order_group" string="Datos de la orden">
-                        <field name="partner_id" />
-                        <field name="order_number" />
-                        <field name="date_received"/>
-                        <field name="order_status" />
-                        <field name="order_notes" />
+                        <group name="car_group" string="Informacion del vehiculo">
+                            <field name="car_brand" />
+                            <field name="car_line_id" />
+                            <field name="car_plate" />
+                            <field name="car_color" />
+                            <field name="car_year" />
+                            <field name="car_odometer_value" />
+                            <field name="car_odometer_measurement" />
+                        </group>    
+    
+                        <group name="order_group" string="Datos de la orden">
+                            <field name="partner_id" />
+                            <field name="order_number" />
+                            <field name="date_received"/>
+                            <field name="order_status" />
+                            <field name="order_notes" />
+                        </group>
+    
                     </group>
-
+    
                     <group name="order_detail" string="Detalle de la orden">
                         <field name="order_details" ref="work_order_details_tree_view" />
-                    </group>
-            </form>
+                    </group>    
+                </page>
 
+                <page string="Envíos" name="order_shipping_page">
+
+                    <group name="order_shipping" string="Envio">
+                        <field name="order_shippings" ref="work_order_shippings_tree_view" />
+                    </group>
+
+                </page>
+            </notebook>
         </field>
 
     </record>
@@ -91,6 +100,33 @@
                 <field name="product_id" />
                 <field name="unit_price" />
                 <field name="detail_total" />
+            </form>
+        </field>
+    </record>
+
+    <!-- Work Order Shipping -->   
+    <record id="work_order_shippings_tree_view" model="ir.ui.view">
+        <field name="name">Work Order Shippings Tree</field>
+        <field name="model">workshop.work.order.shipping</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="shipping_date" />
+                <field name="name" />
+                <field name="personal_id" />
+                <field name="phone" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="work_order_shippings_form_view" model="ir.ui.view">
+        <field name="name">Work Order Shippings Form</field>
+        <field name="model">workshop.work.order.shipping</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="shipping_date" />
+                <field name="name" />
+                <field name="personal_id" />
+                <field name="phone" />
             </form>
         </field>
     </record>

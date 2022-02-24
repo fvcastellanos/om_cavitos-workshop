@@ -26,12 +26,18 @@ class WorkOrder(models.Model):
         'Detalle de la orden'
     )
 
+    order_shippings = fields.One2many(
+        'workshop.work.order.shipping',
+        'work_order_id',
+        'Nota de envío'
+    )
+
     order_number = fields.Char("Número de orden", index = True, translate = True, required = True)
     date_received = fields.Date('Fecha de ingreso', default = lambda self: fields.Date.today(), required = True)
 
     order_type = fields.Selection([
         ('product', 'Producto'),
-        ('service', 'Reparacion')
+        ('service', 'Reparación')
     ], index = True, default = 'service')
 
     order_status = fields.Selection([
