@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="work_order_shipping_generation" model="ir.actions.report">
+        <field name="name">Generar Nota de Envío</field>
+        <field name="model">workshop.work.order</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">om_cavitos-workshop.work_order_shipping</field> 
+        <field name="report_file">om_cavitos-workshop.work_order_shipping</field>       
+        <field name="binding_model_id" ref="om_cavitos-workshop.model_workshop_work_order" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

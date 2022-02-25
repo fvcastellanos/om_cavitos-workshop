@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Actions -->
-
-    <act_window id="action_work_orders" name="Ordenes de trabajo" res_model="workshop.work.order" view_mode="tree,form"/>
-
-    <act_window id="action_work_orders_kanban" name="Tablero de Ordenes" res_model="workshop.work.order" 
-        view_mode="kanban,tree,form"/>
-
-    <act_window id="action_brands" name="Marcas de vehículos" res_model="workshop.car.brand" view_mode="tree,form"/>
-    <act_window id="action_brand_lines" name="Líneas por marca" res_model="workshop.car.line" view_mode="tree,form"/>
-
     <!-- Menu -->
 
     <menuitem name="Taller mecanico" id="menu_workshop" action="action_work_orders" />
@@ -22,5 +12,45 @@
     <menuitem id="menu_brand_lines" name="Líneas por marca" action="action_brand_lines" parent="menu_catalogs" sequence="40" />
 
     <menuitem id="menu_work_orders_kanban" name="Tablero de Ordenes" action="action_work_orders_kanban" parent="menu_workshop" sequence="30" />
+
+    <!-- Actions -->
+
+    <record id="action_work_orders" model="ir.actions.act_window">
+        <field name="name">Ordenes de trabajo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">workshop.work.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear / modificar ordenes de trabajo
+            </p>
+        </field>
+    </record>
+
+    <record id="action_work_orders_kanban" model="ir.actions.act_window">
+        <field name="name">Tablero de Ordenes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">workshop.work.order</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Verificar estado de ordenes de trabajo
+            </p>
+        </field>
+    </record>
+
+    <record id="action_brands" model="ir.actions.act_window">
+        <field name="name">Marcas de vehículos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">workshop.car.brand</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_brand_lines" model="ir.actions.act_window">
+        <field name="name">Líneas por marca</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">workshop.car.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
 </odoo>
