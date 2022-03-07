@@ -10,10 +10,6 @@ class WorkOrderDetail(models.Model):
         'Orden de trabajo'
     )
 
-    # currency_id = fields.Many2one(
-    #     'pricelist_id.currency_id', 
-    #     'Moneda')    
-
     product_id = fields.Many2one(
         'product.product',
         'Producto'
@@ -23,7 +19,6 @@ class WorkOrderDetail(models.Model):
 
     # Add currency field
     unit_price = fields.Float('Precio Unitario', (10, 2), required = True)
-    # unit_price = fields.Monetary('Precio Unitario')
 
     detail_total = fields.Float('Total', (10, 2), compute = "_calculate_detail_total")
 
@@ -36,6 +31,8 @@ class WorkOrderDetail(models.Model):
     @api.depends('amount', 'unit_price')
     def _calculate_detail_total(self):
         self.__calculate_detail_total()
+
+    # ----------------------------------------------------------------------------------------
 
     def __calculate_detail_total(self):
         for record in self:
