@@ -13,9 +13,7 @@
     'installable': True,
     'depends': [
         'account',
-        'base',
-        'sale_management',
-        'stock'
+        'base'
     ],
     'data': [
         'views/workshop_menu.xml',

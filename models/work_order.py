@@ -3,6 +3,7 @@ from odoo import fields, models, api
 class WorkOrder(models.Model):
     _name = "workshop.work.order"
     _description = "Work Order"
+    _rec_name = 'order_number'
     _order = "order_number desc"
 
     partner_id = fields.Many2one(
