@@ -16,11 +16,6 @@ class WorkOrder(models.Model):
         'Línea'
     )
 
-    order_id = fields.Many2one(
-        'sale.order',
-        'Presupuesto'
-    )
-
     order_details = fields.One2many(
         'workshop.work.order.detail',
         'work_order_id',
@@ -31,6 +26,12 @@ class WorkOrder(models.Model):
         'workshop.work.order.shipping',
         'work_order_id',
         'Nota de envío'
+    )
+
+    product_details = fields.One2many(
+        'account.move.line',
+        'work_order_id',
+        'Productos'
     )
 
     order_number = fields.Char("Número de orden", index = True, translate = True, required = True)

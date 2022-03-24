@@ -61,7 +61,15 @@
                     </group>
     
                     <group name="order_detail" string="Detalle de la orden">
-                        <field name="order_details" ref="work_order_details_tree_view" />
+                        <field name="product_details">
+                            <tree create="false" edit="false">
+                                <field name="quantity" />
+                                <field name="product_id" />
+                                <field name="price_unit" />
+                                <field name="discount" />
+                                <field name="price_total" sum="Total" />
+                            </tree>                
+                        </field>
                     </group>    
                 </page>
 
@@ -78,7 +86,7 @@
     </record>
 
     <!-- Work Order Detail -->   
-    <record id="work_order_details_tree_view" model="ir.ui.view">
+    <!-- <record id="work_order_details_tree_view" model="ir.ui.view">
         <field name="name">Work Order Details Tree</field>
         <field name="model">workshop.work.order.detail</field>
         <field name="arch" type="xml">
@@ -89,9 +97,9 @@
                 <field name="detail_total" sum="Total" />
             </tree>
         </field>
-    </record>
+    </record> -->
 
-    <record id="work_order_details_form_view" model="ir.ui.view">
+    <!-- <record id="work_order_details_form_view" model="ir.ui.view">
         <field name="name">Work Order Details Form</field>
         <field name="model">workshop.work.order.detail</field>
         <field name="arch" type="xml">
@@ -100,6 +108,20 @@
                 <field name="product_id" />
                 <field name="unit_price" />
                 <field name="detail_total" />
+            </form>
+        </field>
+    </record> -->
+
+    <record id="work_order_details_form_view" model="ir.ui.view">
+        <field name="name">Work Order Details Form</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="product_id" />
+                <field name="quantity" />
+                <field name="price_unit" />
+                <field name="discount" />
+                <field name="price_total" />
             </form>
         </field>
     </record>

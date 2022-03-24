@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_tree_bank" model="ir.ui.view">
+        <field name="name">Bank Tree</field>
+        <field name="model">res.partner.bank</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bank_id" />
+                <field name="account_type" />
+                <field name="acc_number" />
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="view_form_bank" model="ir.ui.view">
+        <field name="name">Bank Form</field>
+        <field name="model">res.partner.bank</field>
+        <field name="arch" type="xml">
+
+            <form>
+                <field name="bank_id" />
+                <field name="account_type" />
+                <field name="acc_number" />
+                <field name="acc_holder_name" />
+            </form>
+
+        </field>
+
+    </record>
+
+</odoo>

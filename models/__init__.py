@@ -5,4 +5,5 @@ from . import work_order
 from . import work_order_detail
 from . import work_order_shipping
 from . import account_move_line
+from . import partner_bank
 

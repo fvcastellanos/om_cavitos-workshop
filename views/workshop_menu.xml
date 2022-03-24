@@ -8,6 +8,8 @@
     <menuitem id="menu_work_orders" name="Ordenes de trabajo" action="action_work_orders" parent="menu_workshop" sequence="10" />
 
     <menuitem id="menu_catalogs" name="Catálogos" parent="menu_workshop" sequence="20" />
+
+        <menuitem id="menu_banks" name="Cuentas bancarias" action="action_workshop_banks" parent="menu_catalogs" sequence="5" />
         <menuitem id="menu_clients" name="Clientes" action="account.res_partner_action_customer" parent="menu_catalogs" sequence="10" />
         <menuitem id="menu_products" name="Productos" action="product.product_template_action_all" parent="menu_catalogs" sequence="20" />
         <menuitem id="menu_brands" name="Marcas vehículos" action="action_brands" parent="menu_catalogs" sequence="60" />
@@ -55,6 +57,13 @@
         <field name="name">Líneas por marca</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">workshop.car.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_workshop_banks" model="ir.actions.act_window">
+        <field name="name">Cuantas bancarias</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.bank</field>
         <field name="view_mode">tree,form</field>
     </record>
 

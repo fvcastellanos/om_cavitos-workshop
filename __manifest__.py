@@ -22,6 +22,7 @@
         'views/work_order_view.xml',
         'views/work_order_kanban_view.xml',
         'views/provider_invoice_view.xml',
+        'views/bank_view.xml',
         'reports/work_order_shipping.xml',
         'reports/work_order_shipping_view.xml'
     ]
