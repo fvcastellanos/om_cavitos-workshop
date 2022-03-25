@@ -18,14 +18,12 @@
         <field name="name">Bank Form</field>
         <field name="model">res.partner.bank</field>
         <field name="arch" type="xml">
-
             <form>
                 <field name="bank_id" />
                 <field name="account_type" />
                 <field name="acc_number" />
                 <field name="acc_holder_name" />
             </form>
-
         </field>
 
     </record>
