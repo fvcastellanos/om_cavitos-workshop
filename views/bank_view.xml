@@ -1,8 +1,21 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <odoo>
 
-    <record id="view_tree_bank" model="ir.ui.view">
-        <field name="name">Bank Tree</field>
+    <record id="accounts_search_view" model="ir.ui.view">
+        <field name="name">Accounts Search</field>
+        <field name="model">res.partner.bank</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="bank_id" />
+                <field name="account_type" />
+                <field name="acc_number" />
+            </search>
+        </field>
+
+    </record>
+
+    <record id="accounts_tree_view" model="ir.ui.view">
+        <field name="name">Accounts Tree</field>
         <field name="model">res.partner.bank</field>
         <field name="arch" type="xml">
             <tree>
@@ -14,16 +27,14 @@
 
     </record>
 
-    <record id="view_form_bank" model="ir.ui.view">
-        <field name="name">Bank Form</field>
+    <record id="accounts_form_view" model="ir.ui.view">
+        <field name="name">Account Form</field>
         <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
         <field name="arch" type="xml">
-            <form>
-                <field name="bank_id" />
+            <field name="acc_number" position="after">
                 <field name="account_type" />
-                <field name="acc_number" />
-                <field name="acc_holder_name" />
-            </form>
+            </field>
         </field>
 
     </record>

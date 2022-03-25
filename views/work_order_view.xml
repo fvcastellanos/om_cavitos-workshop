@@ -62,12 +62,12 @@
     
                     <group name="order_detail" string="Detalle de la orden">
                         <field name="product_details">
-                            <tree create="false" edit="false">
-                                <field name="quantity" />
-                                <field name="product_id" />
-                                <field name="price_unit" />
-                                <field name="discount" />
-                                <field name="price_total" sum="Total" />
+                            <tree create="false" editable="bottom">
+                                <field name="quantity" readonly="True" />
+                                <field name="product_id" readonly="True" />
+                                <field name="price_unit" readonly="True" />
+                                <field name="unit_price_sale" />
+                                <field name="total_sale" sum="Total" />
                             </tree>                
                         </field>
                     </group>    
@@ -111,20 +111,6 @@
             </form>
         </field>
     </record> -->
-
-    <record id="work_order_details_form_view" model="ir.ui.view">
-        <field name="name">Work Order Details Form</field>
-        <field name="model">account.move.line</field>
-        <field name="arch" type="xml">
-            <form>
-                <field name="product_id" />
-                <field name="quantity" />
-                <field name="price_unit" />
-                <field name="discount" />
-                <field name="price_total" />
-            </form>
-        </field>
-    </record>
 
     <!-- Work Order Shipping -->   
     <record id="work_order_shippings_tree_view" model="ir.ui.view">
