@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_brands" model="ir.actions.act_window">
+        <field name="name">Marcas de vehículos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">workshop.car.brand</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_brand_lines" model="ir.actions.act_window">
+        <field name="name">Líneas por marca</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">workshop.car.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_product_category" model="ir.actions.act_window">
+        <field name="name">Categorías de productos</field>
+        <field name="res_model">workshop.product.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
