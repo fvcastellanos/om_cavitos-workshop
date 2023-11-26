@@ -6,14 +6,16 @@
     <!-- <menuitem name="Taller mecanico" id="menu_workshop" action="action_work_orders" /> -->
     <menuitem name="Taller Mecánico" id="menu_workshop" />
 
-    <!-- <menuitem id="menu_work_orders" name="Ordenes de trabajo" action="action_work_orders" parent="menu_workshop" sequence="10" /> -->
+    <menuitem id="menu_work_orders" name="Ordenes de trabajo" action="action_work_orders" parent="menu_workshop" sequence="10" />
     <menuitem id="menu_catalogs" name="Catálogos" parent="menu_workshop" sequence="20" />
     <!-- <menuitem id="menu_clients" name="Clientes" action="account.res_partner_action_customer" parent="menu_catalogs" sequence="10" /> -->
     <menuitem id="menu_brands" name="Marcas vehículos" action="action_brands" parent="menu_catalogs" sequence="30" />
     <!-- <menuitem id="menu_brand_lines" name="Líneas por marca" action="action_brand_lines" parent="menu_catalogs" sequence="40" /> -->
-    <menuitem id="menu_product_category" name="Categoría de productos" parent="menu_catalogs" action="action_product_category" sequence="50" />
-
+    <menuitem id="menu_product_category" name="Categoría de productos" parent="menu_catalogs" action="action_product_category" sequence="40" />
+    <menuitem id="menu_products" name="Productos" action="product.product_template_action" parent="menu_catalogs" sequence="50" />
     <!-- <menuitem id="menu_work_orders_kanban" name="Tablero de Ordenes" action="action_work_orders_kanban" parent="menu_workshop" sequence="30" /> -->
+
+    <menuitem id="menu_workshop_invoices" name="Facturación" parent="menu_workshop" sequence="60" />
 
     <!-- Actions -->
 
