@@ -24,6 +24,7 @@
         'views/product_view.xml',
         'views/product_category_view.xml',
         'views/workshop_menu.xml',
-        'views/work_order_view.xml'
+        'views/work_order_view.xml',
+        'views/account_move_line.xml'
     ]
 }

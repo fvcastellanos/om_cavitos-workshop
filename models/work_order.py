@@ -20,11 +20,11 @@ class WorkOrder(models.Model):
     #     'Presupuesto'
     # )
 
-    # order_details = fields.One2many(
-    #     'workshop.work.order.detail',
-    #     'work_order_id',
-    #     'Detalle de la orden'
-    # )
+    order_details = fields.One2many(
+        'workshop.work.order.detail',
+        'work_order_id',
+        'Detalle de la orden'
+    )
 
     # order_shippings = fields.One2many(
     #     'workshop.work.order.shipping',

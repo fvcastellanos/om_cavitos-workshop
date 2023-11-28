@@ -61,9 +61,9 @@
         
                         </group>
         
-                        <!-- <group name="order_detail" string="Detalle de la orden">
+                        <group name="order_detail" string="Detalle de la orden">
                             <field name="order_details" ref="work_order_details_tree_view" />
-                        </group>     -->
+                        </group>    
                     </page>
 
                     <page string="Envíos" name="order_shipping_page">
@@ -80,7 +80,7 @@
     </record>
 
     <!-- Work Order Detail -->   
-    <!-- <record id="work_order_details_tree_view" model="ir.ui.view">
+    <record id="work_order_details_tree_view" model="ir.ui.view">
         <field name="name">Work Order Details Tree</field>
         <field name="model">workshop.work.order.detail</field>
         <field name="arch" type="xml">
@@ -91,9 +91,9 @@
                 <field name="detail_total" sum="Total" />
             </tree>
         </field>
-    </record> -->
+    </record>
 
-    <!-- <record id="work_order_details_form_view" model="ir.ui.view">
+    <record id="work_order_details_form_view" model="ir.ui.view">
         <field name="name">Work Order Details Form</field>
         <field name="model">workshop.work.order.detail</field>
         <field name="arch" type="xml">
@@ -104,7 +104,7 @@
                 <field name="detail_total" />
             </form>
         </field>
-    </record> -->
+    </record>
 
     <!-- Work Order Shipping -->   
     <!-- <record id="work_order_shippings_tree_view" model="ir.ui.view">
