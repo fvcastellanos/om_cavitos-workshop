@@ -19,6 +19,7 @@
     'data': [
         'data/actions.xml',
         'data/sequences.xml',
+        'data/workshop_product_category.xml',
         'views/car_brand_view.xml',
         # 'views/car_line_view.xml',
         'views/product_view.xml',

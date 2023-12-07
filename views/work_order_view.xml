@@ -89,6 +89,7 @@
                 <field name="product_id" />
                 <field name="unit_price" />
                 <field name="detail_total" sum="Total" />
+                <field name="provider_invoice" />
             </tree>
         </field>
     </record>

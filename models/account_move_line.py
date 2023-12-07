@@ -10,18 +10,41 @@ class AccountMoveLine(models.Model):
     def create(self, vals):
 
         record = super(AccountMoveLine, self).create(vals)
-        self.update_work_order(record)
+
+        if 'order_number' in vals and vals['order_number']:
+            self._update_work_order_detail(record)
 
         return record
 
     def write(self, vals):
 
         result = super(AccountMoveLine, self).write(vals)
-        # self.update_work_order(self)
-        
+        # self._update_work_order_detail(self)
+
+        self._update_related_work_order(vals)
+
+        # if 'order_number' in vals and vals['order_number'] != self.order_number:
+
+        #     self._delete_work_order_detail(self.id)
+
+        #     if vals['order_number']:
+        #         self._update_work_order_detail(self)
+
         return result
 
-    def update_work_order(self, record):
+    # --------------------------------------------------------------------
+
+    def _update_related_work_order(self, vals):
+
+        if 'order_number' in vals and vals['order_number'] != self.order_number:
+
+            self._delete_work_order_detail(self.id)
+
+            if vals['order_number']:
+                self._update_work_order_detail(self)
+
+
+    def _update_work_order_detail(self, record):
 
         if record.order_number:
 
@@ -42,4 +65,15 @@ class AccountMoveLine(models.Model):
 
                 return
 
-            raise ValidationError("Orden de trabajo no encontrada")
+        raise ValidationError("Orden de trabajo no encontrada")
+
+
+    def _delete_work_order_detail(self, account_move_line_id):
+
+        work_order_detail = self.env['workshop.work.order.detail'].search([('account_move_line_id', '=', account_move_line_id)])
+
+        if work_order_detail:
+
+            work_order_detail.unlink()
+
+        return

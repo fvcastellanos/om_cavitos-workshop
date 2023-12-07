@@ -31,11 +31,11 @@ class WorkOrderDetail(models.Model):
 
     @api.onchange('amount', 'unit_price')
     def onchange_amount(self):
-        self.__calculate_detail_total()
+        self._calculate_detail_total()
 
     @api.depends('amount', 'unit_price')
     def _calculate_detail_total(self):
-        self.__calculate_detail_total()
+        self._calculate_detail_total()
 
     def __calculate_detail_total(self):
         for record in self:
