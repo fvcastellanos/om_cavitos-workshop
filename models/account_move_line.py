@@ -1,5 +1,6 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
+from pydispatch import dispatcher
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
@@ -12,7 +13,7 @@ class AccountMoveLine(models.Model):
         record = super(AccountMoveLine, self).create(vals)
 
         if 'order_number' in vals and vals['order_number']:
-            self._update_work_order_detail(record)
+            dispatcher.send(signal="account_move_line_created", sender="account_move_line", invoice_id=record.id)
 
         return record
 
@@ -21,7 +22,7 @@ class AccountMoveLine(models.Model):
         result = super(AccountMoveLine, self).write(vals)
         # self._update_work_order_detail(self)
 
-        self._update_related_work_order(vals)
+        # self._update_related_work_order(vals)
 
         # if 'order_number' in vals and vals['order_number'] != self.order_number:
 
