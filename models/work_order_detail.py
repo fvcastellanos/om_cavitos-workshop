@@ -4,13 +4,9 @@ class WorkOrderDetail(models.Model):
     _name = "workshop.work.order.detail"
     _description = "Order Detail"
 
-    # _sql_constraints = [
-    #         ('uq_account_move_line_id', 'UNIQUE(account_move_line_id)', 'The account move line must be unique.'),
-    #     ]
-
     # _order = "order_number desc"
 
-    work_order_id = fields.Many2one(
+    work_order = fields.Many2one(
         'workshop.work.order',
         'Orden de trabajo'
     )
@@ -48,7 +44,7 @@ class WorkOrderDetail(models.Model):
 
         result = super(WorkOrderDetail, self).unlink()
 
-        self._update_account_move_line(self.account_move_line_id)
+        # self._update_account_move_line(self.account_move_line_id)
 
         # accountMoveLine = self.env['account.move.line'].search([('id', '=', self.account_move_line_id)])
 
@@ -64,6 +60,7 @@ class WorkOrderDetail(models.Model):
             record.detail_total = record.amount * record.unit_price
 
     def _get_provider_invoice(self):
+
         for record in self:
             if record.account_move_line_id:
 
@@ -74,6 +71,7 @@ class WorkOrderDetail(models.Model):
 
             else:
                 record.provider_invoice = None
+
 
     def _update_account_move_line(self, account_move_line_id):
 

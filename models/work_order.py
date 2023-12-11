@@ -22,7 +22,7 @@ class WorkOrder(models.Model):
 
     order_details = fields.One2many(
         'workshop.work.order.detail',
-        'work_order_id',
+        'work_order',
         'Detalle de la orden'
     )
 
