@@ -1,4 +1,5 @@
 from odoo import fields, api, models
+from odoo.exceptions import ValidationError
 
 class WorkOrderDetail(models.Model):
     _name = "workshop.work.order.detail"
@@ -39,6 +40,16 @@ class WorkOrderDetail(models.Model):
     @api.depends('amount', 'unit_price')
     def _calculate_detail_total(self):
         self._calculate_detail_total()
+
+    def write(self, vals):
+
+        for record in self:
+
+            if record.account_move_line_id:
+
+                raise ValidationError("No es posible modificar el detalle de la orden de trabajo, se debe modificar la factura de proveedor")
+
+        return super().write(vals)
 
     def unlink(self):
 

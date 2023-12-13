@@ -30,44 +30,15 @@ class AccountMoveLine(models.Model):
 
         self._update_work_order_detail(self, vals)
         
-        # for record in self:
-
-        #     if not 'order_number' in vals:
-
-        #         # search for account move line in work order detail
-        #         work_order_detail = self.env['workshop.work.order.detail'].search([('account_move_line_id', '=', record.id)], limit=1)
-
-        #         if work_order_detail:
-
-        #             work_order_detail.write({
-        #                 'amount': record.quantity,
-        #                 'unit_price': record.price_unit,
-        #                 'detail_total': record.price_subtotal,
-        #                 'product_id': record.product_id.id,
-        #             })
-                
-        #         return
-
-        #     # search for account move line in work order detail
-        #     work_order_detail = self.env['workshop.work.order.detail'].search([('account_move_line_id', '=', record.id)], limit=1)
-
-        #     if work_order_detail:
-
-        #         work_order_detail.unlink()
-
-
-        #     if vals['order_number']:
-
-        #         self._create_work_order_detail(record, vals['order_number'])
-
         return result
 
     def unlink(self):
-        
-        # if self.order_number:
-        #     dispatcher.send(signal="account_move_line_deleted", sender="account_move_line", model=self)
 
-        return super(AccountMoveLine, self).unlink()
+        result = super(AccountMoveLine, self).unlink()
+
+        self._delete_work_order_detail(self)
+
+        return result
 
     # --------------------------------------------------------------------
 
@@ -126,25 +97,19 @@ class AccountMoveLine(models.Model):
                 
                 return
 
-            # search for account move line in work order detail
-            work_order_detail = self.env['workshop.work.order.detail'].search([('account_move_line_id', '=', record.id)], limit=1)
-
-            if work_order_detail:
-
-                work_order_detail.unlink()
-
+            # search for account move line in work order detail, if found, delete it
+            self._delete_work_order_detail(record)
 
             if vals['order_number']:
 
                 self._create_work_order_detail(record, vals['order_number'])
 
-
-    # def _delete_work_order_detail(self, account_move_line_id):
-
-    #     work_order_detail = self.env['workshop.work.order.detail'].search([('account_move_line_id', '=', account_move_line_id)])
-
-    #     if work_order_detail:
-
-    #         work_order_detail.unlink()
-
-    #     return
+    def _delete_work_order_detail(self, records): 
+            
+            for record in records:
+    
+                work_order_detail = self.env['workshop.work.order.detail'].search([('account_move_line_id', '=', record.id)], limit=1)
+    
+                if work_order_detail:
+    
+                    work_order_detail.unlink()
