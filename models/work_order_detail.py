@@ -53,16 +53,9 @@ class WorkOrderDetail(models.Model):
 
     def unlink(self):
 
-        result = super(WorkOrderDetail, self).unlink()
+        self._update_account_move_line(self)
 
-        # self._update_account_move_line(self.account_move_line_id)
-
-        # accountMoveLine = self.env['account.move.line'].search([('id', '=', self.account_move_line_id)])
-
-        # if accountMoveLine:
-        #     accountMoveLine.write({'order_number': None})
-
-        return result
+        return super(WorkOrderDetail, self).unlink()
 
     # ----------------------------------------------------------------------------------------
 
@@ -84,9 +77,13 @@ class WorkOrderDetail(models.Model):
                 record.provider_invoice = None
 
 
-    def _update_account_move_line(self, account_move_line_id):
+    def _update_account_move_line(self, records):
 
-        accountMoveLine = self.env['account.move.line'].search([('id', '=', account_move_line_id)])
+        for record in records:
 
-        if accountMoveLine:
-            accountMoveLine.write({'order_number': None})
+            if record.account_move_line_id:
+
+                accountMoveLine = self.env['account.move.line'].search([('id', '=', record.account_move_line_id)])
+
+                if accountMoveLine and accountMoveLine.order_number:
+                    accountMoveLine.write({'order_number': None})
