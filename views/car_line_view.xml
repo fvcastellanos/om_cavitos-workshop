@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_search_brand_line" model="ir.ui.view">
+        <field name="name">Brand Line Search</field>
+        <field name="model">workshop.car.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="brand_id" />
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_tree_brand_line" model="ir.ui.view">
+        <field name="name">Brand Line Tree</field>
+        <field name="model">workshop.car.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="brand_id" />
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_form_brand_line" model="ir.ui.view">
+        <field name="name">Brand Line Form</field>
+        <field name="model">workshop.car.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="brand_id" />
+                    <field name="name" />
+                    <field name="description" />
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

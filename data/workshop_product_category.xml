@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="True">
+
+  <data>
+
+      <record id="product_family_tires" model="workshop.product.category">
+          <field name="name">LLANTAS</field>
+      </record>
+
+      <record id="product_family_parts" model="workshop.product.category">
+          <field name="name">REPUESTOS</field>
+      </record>
+
+      <record id="product_family_oil" model="workshop.product.category">
+          <field name="name">ACEITES Y GRASAS</field>
+      </record>
+
+      <record id="product_family_lubricants" model="workshop.product.category">
+          <field name="name">LUBRICANTES</field>
+      </record>
+
+      <record id="product_family_batteries" model="workshop.product.category">
+          <field name="name">BATERIAS</field>
+      </record>
+
+      <record id="product_family_external_workshops" model="workshop.product.category">
+          <field name="name">TALLERES AJENOS</field>
+      </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the product form view -->
+        <record id="product_template_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.view.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="product_category_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit the product search view -->
+        <record id="product_template_search_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.search.view.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[last()]" position="after">
+                    <filter string="Familia de productos" name="group_by_product_category" domain="[]" context="{'group_by':'product_category_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit the product tree view -->
+        <record id="product_template_tree_view_override" model="ir.ui.view">
+            <field name="name">product.template.tree.view.override</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <tree>
+                </tree>
+                <xpath expr="//field[@name='default_code']" position="before">
+                    <field name="product_category_id"/>
+                </xpath>
+            </field>
+        </record>        
+    </data>
+</odoo>
