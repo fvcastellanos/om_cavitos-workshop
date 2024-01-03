@@ -88,12 +88,19 @@ class AccountMoveLine(models.Model):
 
                 if work_order_detail:
 
-                    work_order_detail.write({
+                    work_order_detail.with_context({'from_account_move_line': True}).write({
                         'amount': record.quantity,
                         'unit_price': record.price_unit,
                         'detail_total': record.price_subtotal,
                         'product_id': record.product_id.id,
                     })
+
+                    # work_order_detail.write({
+                    #     'amount': record.quantity,
+                    #     'unit_price': record.price_unit,
+                    #     'detail_total': record.price_subtotal,
+                    #     'product_id': record.product_id.id,
+                    # })
                 
                 return
 

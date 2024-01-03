@@ -43,11 +43,7 @@ class WorkOrderDetail(models.Model):
 
     def write(self, vals):
 
-        for record in self:
-
-            if record.account_move_line_id:
-
-                raise ValidationError("No es posible modificar el detalle de la orden de trabajo, se debe modificar la factura de proveedor")
+        self._validate_detail_modification(self)
 
         return super().write(vals)
 
@@ -87,3 +83,13 @@ class WorkOrderDetail(models.Model):
 
                 if accountMoveLine and accountMoveLine.order_number:
                     accountMoveLine.write({'order_number': None})
+
+    def _validate_detail_modification(self, records): 
+
+        for record in records:
+
+            from_account_move_line = record._context.get('from_account_move_line')
+
+            if record.account_move_line_id and not from_account_move_line:
+
+                raise ValidationError("No es posible modificar el detalle de la orden de trabajo, se debe modificar la factura de proveedor")
