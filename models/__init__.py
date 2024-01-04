@@ -5,3 +5,6 @@ from . import product_template
 from . import work_order
 from . import work_order_detail
 from . import account_move_line
+from . import account_move
+from . import stock_move
+

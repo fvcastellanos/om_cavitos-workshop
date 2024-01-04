@@ -17,10 +17,17 @@ class AccountMoveLine(models.Model):
     def create(self, vals):
 
         record = super(AccountMoveLine, self).create(vals)
+        is_vendor_invoice = self._belongs_to_vendor_invoice(record)
 
-        if 'order_number' in vals and vals['order_number']:
+        if 'order_number' in vals and vals['order_number'] and is_vendor_invoice:
 
             self._create_work_order_detail(record, vals['order_number'])
+
+        if is_vendor_invoice:
+
+            _logger.info(f"Let's do some magic with Inventory")
+
+            self._create_stock_move(record)
 
         return record
 
@@ -28,15 +35,23 @@ class AccountMoveLine(models.Model):
 
         result = super(AccountMoveLine, self).write(vals)
 
-        self._update_work_order_detail(self, vals)
+        belongs_to_vendor_invoice = self._belongs_to_vendor_invoice(self)
+
+        if belongs_to_vendor_invoice:
+
+            self._update_work_order_detail(self, vals)
         
         return result
 
     def unlink(self):
 
+        belongs_to_vendor_invoice = self._belongs_to_vendor_invoice(self)
+
         result = super(AccountMoveLine, self).unlink()
 
-        self._delete_work_order_detail(self)
+        if belongs_to_vendor_invoice:
+
+            self._delete_work_order_detail(self)
 
         return result
 
@@ -94,13 +109,6 @@ class AccountMoveLine(models.Model):
                         'detail_total': record.price_subtotal,
                         'product_id': record.product_id.id,
                     })
-
-                    # work_order_detail.write({
-                    #     'amount': record.quantity,
-                    #     'unit_price': record.price_unit,
-                    #     'detail_total': record.price_subtotal,
-                    #     'product_id': record.product_id.id,
-                    # })
                 
                 return
 
@@ -120,3 +128,44 @@ class AccountMoveLine(models.Model):
                 if work_order_detail:
     
                     work_order_detail.unlink()
+
+
+    def _belongs_to_vendor_invoice(self, record):
+
+        if record.move_id.move_type == 'in_invoice':
+
+            return True
+
+        return False
+
+    def _belongs_to_vendor_invoice(self, records):
+
+        for record in records:
+
+            if record.move_id.move_type == 'in_invoice':
+
+                return True
+
+        return False
+
+
+    def _create_stock_move(self, invoice_line):
+
+        if invoice_line.product_id and invoice_line.product_id.type == 'product':
+
+            invoice = invoice_line.move_id
+
+        # Create a stock move for the invoice line
+            self.env['stock.move'].create({
+                'name': invoice_line.name,
+                'partner_id': invoice.partner_id.id,
+                'product_id': invoice_line.product_id.id,
+                'product_uom': invoice_line.product_id.uom_id.id,
+                'product_uom_qty': invoice_line.quantity,
+                'price_unit': invoice_line.price_unit,
+                'quantity': invoice_line.quantity,
+                'location_id': self.env.ref('stock.stock_location_suppliers').id,
+                'location_dest_id': self.env.ref('stock.stock_location_stock').id,
+                'state': 'draft',
+                'account_move_line_id': invoice_line.id
+            })

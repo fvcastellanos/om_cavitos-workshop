@@ -13,7 +13,6 @@
     'depends': [
         'account',
         'base',
-        # 'sale_management',
         'stock'
     ],
     'data': [
