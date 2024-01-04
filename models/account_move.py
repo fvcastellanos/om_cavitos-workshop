@@ -23,7 +23,7 @@ class AccountMove(models.Model):
                         # Note: In a real-world scenario, you would need to properly handle the stock move validation
                         # This might involve calling the _action_done method, or manually setting the 'done' state
                         # and updating the product's quantity, depending on your specific requirements
-                        # stock_move.write({'state': 'done'})
-                        stock_move.action_done()
+                        stock_move.write({'state': 'done'})
+                        # stock_move.action_done()
 
         return result

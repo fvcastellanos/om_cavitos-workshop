@@ -154,8 +154,15 @@ class AccountMoveLine(models.Model):
         if invoice_line.product_id and invoice_line.product_id.type == 'product':
 
             invoice = invoice_line.move_id
+            # partner = invoice.partner_id
+            partner_location = invoice.partner_id.property_stock_supplier
+            input_location = self.env['stock.location'].search([('barcode', '=', 'WH-INPUT')], limit=1)
 
-        # Create a stock move for the invoice line
+            location_dest_id = None            
+            if input_location is not None:
+                location_dest_id = input_location.location_id
+
+            # Create a stock move for the invoice line
             self.env['stock.move'].create({
                 'name': invoice_line.name,
                 'partner_id': invoice.partner_id.id,
@@ -164,8 +171,8 @@ class AccountMoveLine(models.Model):
                 'product_uom_qty': invoice_line.quantity,
                 'price_unit': invoice_line.price_unit,
                 'quantity': invoice_line.quantity,
-                'location_id': self.env.ref('stock.stock_location_suppliers').id,
-                'location_dest_id': self.env.ref('stock.stock_location_stock').id,
+                'location_id': partner_location.id,
+                'location_dest_id': location_dest_id,
                 'state': 'draft',
                 'account_move_line_id': invoice_line.id
             })
